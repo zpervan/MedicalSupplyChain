@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package medical_supplies;
+
+option go_package = "message.proto/medical_supplies";
+
+// @TODO: Just a skeleton - add more data later on
+service MedicalSupplies {
+  rpc FetchAll(Request) returns (Response) {}
+}
+
+message Request { string Data = 1; }
+
+message Response { string Data = 1; }

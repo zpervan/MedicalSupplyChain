@@ -1,0 +1,31 @@
+name: Ubuntu Client
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: 1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # TODO: Figure out how to use the protoc bin in the `tools` folder
+      - name: Install protobuf
+        run: sudo apt-get -y install protobuf-compiler
+
+      - name: Build client
+        run: |
+          cd client
+          cargo build --verbose

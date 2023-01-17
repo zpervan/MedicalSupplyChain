@@ -1,0 +1,41 @@
+name: Ubuntu Server
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-go@v3
+        with:
+          go-version: "1.19"
+
+      - name: Install Go protobuf dependencies
+        run: |
+          cd server
+          go mod download google.golang.org/protobuf
+          go install google.golang.org/protobuf/cmd/protoc-gen-go
+          go get google.golang.org/grpc/cmd/protoc-gen-go-grpc
+          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc
+
+      # TODO: Fix protobuf generation
+      # - name: Generate gRPC protobuf
+      #   run: |
+      #     protoc --go_out=$(pwd)/proto --go_opt=paths=source_relative --go-grpc_out=$(pwd)/proto --go-grpc_opt=paths=source_relative --proto_path=$(cd ../ && pwd)/messages medical_supplies.proto
+
+      - name: Build server
+        run: |
+          cd server
+          go mod tidy
+          go build -o server.out .

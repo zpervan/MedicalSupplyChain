@@ -1,0 +1,36 @@
+name: Windows Server
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ilammy/msvc-dev-cmd@v1
+      - uses: actions/setup-go@v3
+        with:
+          go-version: "1.19"
+
+      - name: Install Go protobuf dependencies
+        run: |
+          cd server
+          go mod download google.golang.org/protobuf
+          go install google.golang.org/protobuf/cmd/protoc-gen-go
+          go get google.golang.org/grpc/cmd/protoc-gen-go-grpc
+          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc
+
+      - name: Build server
+        run: |
+          cd server
+          go mod tidy
+          go build -o server.out .      

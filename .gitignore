@@ -1,0 +1,7 @@
+# Files
+*.sum
+*.lock
+
+# Folders
+**/target
+**/.idea

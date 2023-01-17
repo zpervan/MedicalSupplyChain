@@ -1,0 +1,18 @@
+[package]
+name = "medical_supply_chain"
+version = "0.1.0"
+edition = "2021"
+authors = ["Zvonimir Pervan <z.pervan65@gmail.com>"]
+
+[dependencies]
+grpc = "*"
+grpc-protobuf = "*"
+futures = "*"
+protobuf = "2"
+
+[build-dependencies]
+protoc-rust-grpc = "0.8.2"
+
+[[bin]]
+name = "client"
+path = "./src/client.rs"
