@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"log"
 	"net"
-	 ms "server/proto"
+	ms "server/proto"
+
+	"server/core"
 
 	"google.golang.org/grpc"
 )
@@ -23,9 +25,12 @@ func (s *server) FetchAll(ctx context.Context, in *ms.Request) (*ms.Response, er
 }
 
 func main() {
+	logger := core.NewLogger()
+	logger.Info("Initializing server...")
+
 	lis, err := net.Listen("tcp", ":50000")
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+		logger.Fatal(fmt.Sprintf("failed to listen: %v", err))
 	}
 
 	sopts := []grpc.ServerOption{}
@@ -33,8 +38,8 @@ func main() {
 	s := grpc.NewServer(sopts...)
 	ms.RegisterMedicalSuppliesServer(s, &server{})
 
-	log.Printf("Starting server...")
+	logger.Info("Starting server...")
 	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)
+		logger.Fatal(fmt.Sprintf("failed to serve: %v", err))
 	}
 }
