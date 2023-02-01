@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+    backend:
+        build:
+            context: .
+            dockerfile: Server.Dockerfile
+        container_name: msc_backend
+        ports:
+            - "3500:3500"
+        env_file: .env
+        restart: always
+        depends_on:
+            - database
+        networks:
+            - network
+
+    database:
+        image: postgres:latest
+        container_name: msc_database
+        restart: always
+        ports:
+            - "5432:5432"
+        env_file: .env
+        volumes:
+            - database_data:/var/lib/postgresql/data
+        networks:
+            - network
+
+volumes:
+    database_data:
+
+networks:
+    network:
+        ipam:
+            driver: default
+            config:
+                - subnet: "192.168.42.0/24"

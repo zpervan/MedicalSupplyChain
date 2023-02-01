@@ -9,7 +9,7 @@ use futures::executor;
 
 fn main()
 {
-    let client = MedicalSuppliesClient::new_plain("127.0.0.1", 50000, Default::default()).unwrap();
+    let client = MedicalSuppliesClient::new_plain("127.0.0.1", 3500, Default::default()).unwrap();
     let mut req = Request::new();
     req.set_Data("Zvonimir".to_owned());
 

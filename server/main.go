@@ -15,7 +15,7 @@ func main() {
 	logger := core.NewLogger()
 	logger.Info("Initializing server...")
 
-	listener, err := net.Listen("tcp", ":50000")
+	listener, err := net.Listen("tcp", ":3500")
 	if err != nil {
 		logger.Fatal(fmt.Sprintf("failed to listen: %v", err))
 	}
