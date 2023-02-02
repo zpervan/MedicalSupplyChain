@@ -24,11 +24,13 @@ services:
         env_file: .env
         volumes:
             - database_data:/var/lib/postgresql/data
+            - ./scripts:/docker-entrypoint-initdb.d
         networks:
             - network
 
 volumes:
     database_data:
+
 
 networks:
     network:

@@ -4,18 +4,21 @@ import (
 	"context"
 	"fmt"
 	"server/core"
+	"server/database"
 	ms "server/proto"
 )
 
 type Server struct {
 	Log *core.Logger
+	Database *database.Database
 	ms.UnimplementedMedicalSuppliesServer
 }
 
-func NewServer(log *core.Logger) *Server {
+func NewServer(log *core.Logger, database *database.Database) *Server {
 	server := &Server{}
 	
 	server.Log = log
+	server.Database = database
 
 	return server
 }

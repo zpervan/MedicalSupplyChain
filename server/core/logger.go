@@ -28,21 +28,21 @@ func NewLogger() *Logger {
 }
 
 func (l *Logger) Warn(msg string) {
-	l.warnings.Println(msg)
 	log.Println(l.warnings.Prefix() + " " + msg)
+	l.warnings.Println(msg)
 }
 
 func (l *Logger) Info(msg string) {
-	l.information.Println(msg)
 	log.Println(l.information.Prefix() + " " + msg)
+	l.information.Println(msg)
 }
 
 func (l *Logger) Error(msg string) {
-	l.errors.Println(msg)
 	log.Println(l.errors.Prefix() + " " + msg)
+	l.errors.Println(msg)
 }
 
 func (l *Logger) Fatal(msg string) {
-	l.fatal.Fatalln(msg)
 	log.Println(l.fatal.Prefix() + " " + msg)
+	l.fatal.Fatalln(msg)
 }
