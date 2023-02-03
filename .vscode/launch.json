@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Server | Debug",
+            "type": "go",
+            "preLaunchTask": "Build | Debug | Server",
+            "request": "launch",
+            "program": "${cwd}/server",
+            "showLog": true,
+        },        
+        {
+            "name": "Client | Debug",
+            "type": "lldb",
+            "preLaunchTask": "Build | Debug | Client",
+            "request": "launch",
+            "program": "${cwd}/client/target/debug/client",
+        },
+        {
+            "name": "Attach to server process",
+            "type": "go",
+            "request": "attach",
+            "mode": "local",
+            "processId": "${command:pickGoProcess}",
+        },
+    ]
+}

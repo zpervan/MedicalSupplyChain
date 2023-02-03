@@ -1,0 +1,33 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build | Debug | Server",
+      "type": "shell",
+      "windows": {
+        "command": "cd server; go build -o server.o ."
+      },
+      "linux": {
+        "command": "cd server && go build -gcflags=all=\"-N -l\" -o server.o ."
+      },
+      "group": "build"
+    },    
+    {
+      "label": "Build | Debug | Client",
+      "type": "shell",
+      "windows": {
+        "command": "cd client; cargo build"
+      },
+      "linux": {
+        "command": "cd client && cargo build"
+      },
+      "group": "build"
+    },
+    {
+      "label": "Test | Server",
+      "type": "shell",
+      "command": "cd server; go test ... -v",
+      "group": "build"
+    }
+  ]
+}

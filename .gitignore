@@ -1,7 +1,8 @@
 # Files
 *.sum
 *.lock
-*.txt
+*.log
+*.o
 
 # Folders
 **/target
