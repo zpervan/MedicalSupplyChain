@@ -6,8 +6,8 @@
 # MedicalSupplyChain #
 
 ## Environment ##
-- [Rust](https://www.rust-lang.org/tools/install)
-- [Golang](https://go.dev/doc/install)
+- [Rust 1.67](https://www.rust-lang.org/tools/install)
+- [Golang 1.20](https://go.dev/doc/install)
 
 ## Setup ##
 
@@ -18,22 +18,22 @@ Besides the above-mentioned prerequisites, also install the following dependenci
 sudo apt install build-essential autoconf libtool pkg-config
 ```
 
-Install the `protoc` compiler. You can do this in two ways:
-1. Download [protoc 21.6](https://github.com/protocolbuffers/protobuf/releases/download/v21.6/protoc-21.6-linux-x86_64.zip), build it then add the built binary (`bin` file) to your `PATH` environment
+You can install the `protoc` compiler in two ways:
+1. Download [protoc 21.12](https://github.com/protocolbuffers/protobuf/releases/download/v21.12/protoc-21.12-linux-x86_64.zip), build it then add the built binary (`bin` file) to your `PATH` environment
 2. Install with `sudo apt-get install protobuf-compiler`
 
 I recommend to install it via the first step as the `apt-get` repositories tend to lag behind, but it's up to you. Also, don't forget to generate new proto Go files if you have a different version than 21.6. 
 
 Install the Rust `protobuf` extensions by executing:
 ```shell
-
 cargo install grpc-compiler
 ```
 
 Navigate to the `server` folder and execute the following command:
 ```shell
-go install google.golang.org/protobuf/cmd/protoc-gen-go
-go install google.golang.org/grpc/cmd/protoc-gen-go-grpc
+go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+go mod tidy
 ```
 
 Position your terminal at the root of the project and execute the following command to generate `protobuf` and `protobuf-grpc` files for the `server`:
@@ -52,7 +52,19 @@ The `client` has a `build.rs` script which is generating the files each time a b
 
 ### Windows ###
 
-TODO
+Download the `protoc-21.12` protobuf compiler from this [link](https://github.com/protocolbuffers/protobuf/releases/download/v21.12/protoc-21.12-win64.zip).
+
+In your terminal, navigate to the `client` folder and execute:
+```shell
+cargo install grpc-compiler
+```
+
+Navigate to the `server` folder and execute:
+```shell
+go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest # Installs the protoc compiler
+go install google.golang.org/protobuf/cmd/protoc-gen-go@latest  # Installs the protoc plugin for Go
+go mod tidy
+```
 
 ## Run ##
 
