@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -22,7 +23,15 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MedicalSuppliesClient interface {
-	FetchAll(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+	TestRequest(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+	CreateUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*Response, error)
+	FetchUsers(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Response, error)
+	UpdateUser(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+	DeleteUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*Response, error)
+	InsertEquipment(ctx context.Context, in *Item, opts ...grpc.CallOption) (*Response, error)
+	FetchEquipment(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Response, error)
+	UpdateEquipment(ctx context.Context, in *User, opts ...grpc.CallOption) (*Response, error)
+	DeleteEquipment(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
 }
 
 type medicalSuppliesClient struct {
@@ -33,9 +42,81 @@ func NewMedicalSuppliesClient(cc grpc.ClientConnInterface) MedicalSuppliesClient
 	return &medicalSuppliesClient{cc}
 }
 
-func (c *medicalSuppliesClient) FetchAll(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
+func (c *medicalSuppliesClient) TestRequest(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
 	out := new(Response)
-	err := c.cc.Invoke(ctx, "/medical_supplies.MedicalSupplies/FetchAll", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/medical_supplies.MedicalSupplies/TestRequest", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *medicalSuppliesClient) CreateUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*Response, error) {
+	out := new(Response)
+	err := c.cc.Invoke(ctx, "/medical_supplies.MedicalSupplies/CreateUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *medicalSuppliesClient) FetchUsers(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Response, error) {
+	out := new(Response)
+	err := c.cc.Invoke(ctx, "/medical_supplies.MedicalSupplies/FetchUsers", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *medicalSuppliesClient) UpdateUser(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
+	out := new(Response)
+	err := c.cc.Invoke(ctx, "/medical_supplies.MedicalSupplies/UpdateUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *medicalSuppliesClient) DeleteUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*Response, error) {
+	out := new(Response)
+	err := c.cc.Invoke(ctx, "/medical_supplies.MedicalSupplies/DeleteUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *medicalSuppliesClient) InsertEquipment(ctx context.Context, in *Item, opts ...grpc.CallOption) (*Response, error) {
+	out := new(Response)
+	err := c.cc.Invoke(ctx, "/medical_supplies.MedicalSupplies/InsertEquipment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *medicalSuppliesClient) FetchEquipment(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Response, error) {
+	out := new(Response)
+	err := c.cc.Invoke(ctx, "/medical_supplies.MedicalSupplies/FetchEquipment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *medicalSuppliesClient) UpdateEquipment(ctx context.Context, in *User, opts ...grpc.CallOption) (*Response, error) {
+	out := new(Response)
+	err := c.cc.Invoke(ctx, "/medical_supplies.MedicalSupplies/UpdateEquipment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *medicalSuppliesClient) DeleteEquipment(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
+	out := new(Response)
+	err := c.cc.Invoke(ctx, "/medical_supplies.MedicalSupplies/DeleteEquipment", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +127,15 @@ func (c *medicalSuppliesClient) FetchAll(ctx context.Context, in *Request, opts 
 // All implementations must embed UnimplementedMedicalSuppliesServer
 // for forward compatibility
 type MedicalSuppliesServer interface {
-	FetchAll(context.Context, *Request) (*Response, error)
+	TestRequest(context.Context, *Request) (*Response, error)
+	CreateUser(context.Context, *User) (*Response, error)
+	FetchUsers(context.Context, *emptypb.Empty) (*Response, error)
+	UpdateUser(context.Context, *Request) (*Response, error)
+	DeleteUser(context.Context, *User) (*Response, error)
+	InsertEquipment(context.Context, *Item) (*Response, error)
+	FetchEquipment(context.Context, *emptypb.Empty) (*Response, error)
+	UpdateEquipment(context.Context, *User) (*Response, error)
+	DeleteEquipment(context.Context, *Request) (*Response, error)
 	mustEmbedUnimplementedMedicalSuppliesServer()
 }
 
@@ -54,8 +143,32 @@ type MedicalSuppliesServer interface {
 type UnimplementedMedicalSuppliesServer struct {
 }
 
-func (UnimplementedMedicalSuppliesServer) FetchAll(context.Context, *Request) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FetchAll not implemented")
+func (UnimplementedMedicalSuppliesServer) TestRequest(context.Context, *Request) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TestRequest not implemented")
+}
+func (UnimplementedMedicalSuppliesServer) CreateUser(context.Context, *User) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
+}
+func (UnimplementedMedicalSuppliesServer) FetchUsers(context.Context, *emptypb.Empty) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FetchUsers not implemented")
+}
+func (UnimplementedMedicalSuppliesServer) UpdateUser(context.Context, *Request) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
+}
+func (UnimplementedMedicalSuppliesServer) DeleteUser(context.Context, *User) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteUser not implemented")
+}
+func (UnimplementedMedicalSuppliesServer) InsertEquipment(context.Context, *Item) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InsertEquipment not implemented")
+}
+func (UnimplementedMedicalSuppliesServer) FetchEquipment(context.Context, *emptypb.Empty) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FetchEquipment not implemented")
+}
+func (UnimplementedMedicalSuppliesServer) UpdateEquipment(context.Context, *User) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateEquipment not implemented")
+}
+func (UnimplementedMedicalSuppliesServer) DeleteEquipment(context.Context, *Request) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteEquipment not implemented")
 }
 func (UnimplementedMedicalSuppliesServer) mustEmbedUnimplementedMedicalSuppliesServer() {}
 
@@ -70,20 +183,164 @@ func RegisterMedicalSuppliesServer(s grpc.ServiceRegistrar, srv MedicalSuppliesS
 	s.RegisterService(&MedicalSupplies_ServiceDesc, srv)
 }
 
-func _MedicalSupplies_FetchAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _MedicalSupplies_TestRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MedicalSuppliesServer).FetchAll(ctx, in)
+		return srv.(MedicalSuppliesServer).TestRequest(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/medical_supplies.MedicalSupplies/FetchAll",
+		FullMethod: "/medical_supplies.MedicalSupplies/TestRequest",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MedicalSuppliesServer).FetchAll(ctx, req.(*Request))
+		return srv.(MedicalSuppliesServer).TestRequest(ctx, req.(*Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MedicalSupplies_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(User)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MedicalSuppliesServer).CreateUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/medical_supplies.MedicalSupplies/CreateUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MedicalSuppliesServer).CreateUser(ctx, req.(*User))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MedicalSupplies_FetchUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MedicalSuppliesServer).FetchUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/medical_supplies.MedicalSupplies/FetchUsers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MedicalSuppliesServer).FetchUsers(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MedicalSupplies_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MedicalSuppliesServer).UpdateUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/medical_supplies.MedicalSupplies/UpdateUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MedicalSuppliesServer).UpdateUser(ctx, req.(*Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MedicalSupplies_DeleteUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(User)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MedicalSuppliesServer).DeleteUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/medical_supplies.MedicalSupplies/DeleteUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MedicalSuppliesServer).DeleteUser(ctx, req.(*User))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MedicalSupplies_InsertEquipment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Item)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MedicalSuppliesServer).InsertEquipment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/medical_supplies.MedicalSupplies/InsertEquipment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MedicalSuppliesServer).InsertEquipment(ctx, req.(*Item))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MedicalSupplies_FetchEquipment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MedicalSuppliesServer).FetchEquipment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/medical_supplies.MedicalSupplies/FetchEquipment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MedicalSuppliesServer).FetchEquipment(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MedicalSupplies_UpdateEquipment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(User)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MedicalSuppliesServer).UpdateEquipment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/medical_supplies.MedicalSupplies/UpdateEquipment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MedicalSuppliesServer).UpdateEquipment(ctx, req.(*User))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MedicalSupplies_DeleteEquipment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MedicalSuppliesServer).DeleteEquipment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/medical_supplies.MedicalSupplies/DeleteEquipment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MedicalSuppliesServer).DeleteEquipment(ctx, req.(*Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -96,8 +353,40 @@ var MedicalSupplies_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*MedicalSuppliesServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "FetchAll",
-			Handler:    _MedicalSupplies_FetchAll_Handler,
+			MethodName: "TestRequest",
+			Handler:    _MedicalSupplies_TestRequest_Handler,
+		},
+		{
+			MethodName: "CreateUser",
+			Handler:    _MedicalSupplies_CreateUser_Handler,
+		},
+		{
+			MethodName: "FetchUsers",
+			Handler:    _MedicalSupplies_FetchUsers_Handler,
+		},
+		{
+			MethodName: "UpdateUser",
+			Handler:    _MedicalSupplies_UpdateUser_Handler,
+		},
+		{
+			MethodName: "DeleteUser",
+			Handler:    _MedicalSupplies_DeleteUser_Handler,
+		},
+		{
+			MethodName: "InsertEquipment",
+			Handler:    _MedicalSupplies_InsertEquipment_Handler,
+		},
+		{
+			MethodName: "FetchEquipment",
+			Handler:    _MedicalSupplies_FetchEquipment_Handler,
+		},
+		{
+			MethodName: "UpdateEquipment",
+			Handler:    _MedicalSupplies_UpdateEquipment_Handler,
+		},
+		{
+			MethodName: "DeleteEquipment",
+			Handler:    _MedicalSupplies_DeleteEquipment_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

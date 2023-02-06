@@ -1,6 +1,7 @@
 package database
 
 // Representation of a user in the database.
+// TODO: Should we use the protobuf struct instead?
 type User struct {
 	Id         string
 	Username   string
@@ -15,6 +16,7 @@ type User struct {
 //
 // Returns an error if the creation was not successful or the user already exists.
 func (d Database) CreateUser(newUser User) error {
+	// d.handler.Exec("INSERT INTO user_account VALUES")
 	return nil
 }
 
@@ -28,7 +30,7 @@ func (d Database) FetchUsers() error {
 // Update the user with the specified username.
 //
 // Returns an error if the update was not successful.
-func (d Database) UpdateUser(username string) error {
+func (d Database) UpdateUser(user User) error {
 	return nil
 }
 

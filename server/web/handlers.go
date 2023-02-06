@@ -23,8 +23,8 @@ func NewServer(log *core.Logger, database *database.Database) *Server {
 	return server
 }
 
-func (s *Server) FetchAll(ctx context.Context, in *ms.Request) (*ms.Response, error) {
-	s.Log.Info("Received request from client")
+func (s *Server) TestRequest(ctx context.Context, in *ms.Request) (*ms.Response, error) {
+	s.Log.Info("received request from client")
 
 	message := fmt.Sprintf("Hey, my dear friend %s", in.Data)
 
