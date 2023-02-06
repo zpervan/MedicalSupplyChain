@@ -1,14 +1,62 @@
 syntax = "proto3";
 
+import "google/protobuf/empty.proto";
+
 package medical_supplies;
 
 option go_package = "message.proto/medical_supplies";
 
-// @TODO: Just a skeleton - add more data later on
 service MedicalSupplies {
-  rpc FetchAll(Request) returns (Response) {}
+  rpc TestRequest(Request) returns (Response) {}
+  rpc CreateUser(User) returns (Response) {}
+  rpc FetchUsers(google.protobuf.Empty) returns (Response) {}
+  rpc UpdateUser(Request) returns (Response) {}
+  rpc DeleteUser(User) returns (Response) {}
+  rpc InsertEquipment(Item) returns (Response) {}
+  rpc FetchEquipment(google.protobuf.Empty) returns (Response) {}
+  rpc UpdateEquipment(User) returns (Response) {}
+  rpc DeleteEquipment(Request) returns (Response) {}
 }
 
-message Request { string Data = 1; }
+enum ErrorCode {
+  OK = 0;
+  NOT_FOUND = 1;
+  INTERNAL_ERROR = 2;
+  FATAL = 3;
+}
 
-message Response { string Data = 1; }
+message Error {
+  ErrorCode Code = 1;
+  string Message = 2;
+}
+
+message Request {
+  string Data = 1;
+}
+
+message Response 
+{ 
+  string Data = 1;
+  Error Error = 2;
+}
+
+message User {
+	string Id = 1;
+	string Username = 2;
+	string Password = 3;
+	string Name = 4;
+	string Surname = 5;
+	string Role = 6;
+	string Department = 7; 
+}
+
+message Item {
+  string Id = 1;
+	string Name = 2;
+  string Description = 3;
+	string ReceivedDate = 4;
+  string TakenDate = 5;
+	string ModifiedDate = 6;
+  int32 Quantity = 7;
+	string Category = 8;
+}
