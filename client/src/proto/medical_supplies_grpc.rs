@@ -22,23 +22,23 @@
 // server interface
 
 pub trait MedicalSupplies {
-    fn test_request(&self, o: ::grpc::ServerHandlerContext, req: ::grpc::ServerRequestSingle<super::medical_supplies::Request>, resp: ::grpc::ServerResponseUnarySink<super::medical_supplies::Response>) -> ::grpc::Result<()>;
+    fn test_request(&self, o: ::grpc::ServerHandlerContext, req: ::grpc::ServerRequestSingle<super::medical_supplies::Request>, resp: ::grpc::ServerResponseUnarySink<super::medical_supplies::DummyResponse>) -> ::grpc::Result<()>;
 
-    fn create_user(&self, o: ::grpc::ServerHandlerContext, req: ::grpc::ServerRequestSingle<super::medical_supplies::User>, resp: ::grpc::ServerResponseUnarySink<super::medical_supplies::Response>) -> ::grpc::Result<()>;
+    fn create_user(&self, o: ::grpc::ServerHandlerContext, req: ::grpc::ServerRequestSingle<super::medical_supplies::User>, resp: ::grpc::ServerResponseUnarySink<super::medical_supplies::UserResponse>) -> ::grpc::Result<()>;
 
-    fn fetch_users(&self, o: ::grpc::ServerHandlerContext, req: ::grpc::ServerRequestSingle<super::empty::Empty>, resp: ::grpc::ServerResponseUnarySink<super::medical_supplies::Response>) -> ::grpc::Result<()>;
+    fn fetch_users(&self, o: ::grpc::ServerHandlerContext, req: ::grpc::ServerRequestSingle<super::empty::Empty>, resp: ::grpc::ServerResponseUnarySink<super::medical_supplies::UserResponse>) -> ::grpc::Result<()>;
 
-    fn update_user(&self, o: ::grpc::ServerHandlerContext, req: ::grpc::ServerRequestSingle<super::medical_supplies::Request>, resp: ::grpc::ServerResponseUnarySink<super::medical_supplies::Response>) -> ::grpc::Result<()>;
+    fn update_user(&self, o: ::grpc::ServerHandlerContext, req: ::grpc::ServerRequestSingle<super::medical_supplies::Request>, resp: ::grpc::ServerResponseUnarySink<super::medical_supplies::UserResponse>) -> ::grpc::Result<()>;
 
-    fn delete_user(&self, o: ::grpc::ServerHandlerContext, req: ::grpc::ServerRequestSingle<super::medical_supplies::User>, resp: ::grpc::ServerResponseUnarySink<super::medical_supplies::Response>) -> ::grpc::Result<()>;
+    fn delete_user(&self, o: ::grpc::ServerHandlerContext, req: ::grpc::ServerRequestSingle<super::medical_supplies::User>, resp: ::grpc::ServerResponseUnarySink<super::medical_supplies::UserResponse>) -> ::grpc::Result<()>;
 
-    fn insert_equipment(&self, o: ::grpc::ServerHandlerContext, req: ::grpc::ServerRequestSingle<super::medical_supplies::Item>, resp: ::grpc::ServerResponseUnarySink<super::medical_supplies::Response>) -> ::grpc::Result<()>;
+    fn insert_equipment(&self, o: ::grpc::ServerHandlerContext, req: ::grpc::ServerRequestSingle<super::medical_supplies::Item>, resp: ::grpc::ServerResponseUnarySink<super::medical_supplies::EquipmentResponse>) -> ::grpc::Result<()>;
 
-    fn fetch_equipment(&self, o: ::grpc::ServerHandlerContext, req: ::grpc::ServerRequestSingle<super::empty::Empty>, resp: ::grpc::ServerResponseUnarySink<super::medical_supplies::Response>) -> ::grpc::Result<()>;
+    fn fetch_equipment(&self, o: ::grpc::ServerHandlerContext, req: ::grpc::ServerRequestSingle<super::empty::Empty>, resp: ::grpc::ServerResponseUnarySink<super::medical_supplies::EquipmentResponse>) -> ::grpc::Result<()>;
 
-    fn update_equipment(&self, o: ::grpc::ServerHandlerContext, req: ::grpc::ServerRequestSingle<super::medical_supplies::User>, resp: ::grpc::ServerResponseUnarySink<super::medical_supplies::Response>) -> ::grpc::Result<()>;
+    fn update_equipment(&self, o: ::grpc::ServerHandlerContext, req: ::grpc::ServerRequestSingle<super::medical_supplies::User>, resp: ::grpc::ServerResponseUnarySink<super::medical_supplies::EquipmentResponse>) -> ::grpc::Result<()>;
 
-    fn delete_equipment(&self, o: ::grpc::ServerHandlerContext, req: ::grpc::ServerRequestSingle<super::medical_supplies::Request>, resp: ::grpc::ServerResponseUnarySink<super::medical_supplies::Response>) -> ::grpc::Result<()>;
+    fn delete_equipment(&self, o: ::grpc::ServerHandlerContext, req: ::grpc::ServerRequestSingle<super::medical_supplies::Request>, resp: ::grpc::ServerResponseUnarySink<super::medical_supplies::EquipmentResponse>) -> ::grpc::Result<()>;
 }
 
 // client
@@ -56,7 +56,7 @@ impl ::grpc::ClientStub for MedicalSuppliesClient {
 }
 
 impl MedicalSuppliesClient {
-    pub fn test_request(&self, o: ::grpc::RequestOptions, req: super::medical_supplies::Request) -> ::grpc::SingleResponse<super::medical_supplies::Response> {
+    pub fn test_request(&self, o: ::grpc::RequestOptions, req: super::medical_supplies::Request) -> ::grpc::SingleResponse<super::medical_supplies::DummyResponse> {
         let descriptor = ::grpc::rt::ArcOrStatic::Static(&::grpc::rt::MethodDescriptor {
             name: ::grpc::rt::StringOrStatic::Static("/medical_supplies.MedicalSupplies/TestRequest"),
             streaming: ::grpc::rt::GrpcStreaming::Unary,
@@ -66,7 +66,7 @@ impl MedicalSuppliesClient {
         self.grpc_client.call_unary(o, req, descriptor)
     }
 
-    pub fn create_user(&self, o: ::grpc::RequestOptions, req: super::medical_supplies::User) -> ::grpc::SingleResponse<super::medical_supplies::Response> {
+    pub fn create_user(&self, o: ::grpc::RequestOptions, req: super::medical_supplies::User) -> ::grpc::SingleResponse<super::medical_supplies::UserResponse> {
         let descriptor = ::grpc::rt::ArcOrStatic::Static(&::grpc::rt::MethodDescriptor {
             name: ::grpc::rt::StringOrStatic::Static("/medical_supplies.MedicalSupplies/CreateUser"),
             streaming: ::grpc::rt::GrpcStreaming::Unary,
@@ -76,7 +76,7 @@ impl MedicalSuppliesClient {
         self.grpc_client.call_unary(o, req, descriptor)
     }
 
-    pub fn fetch_users(&self, o: ::grpc::RequestOptions, req: super::empty::Empty) -> ::grpc::SingleResponse<super::medical_supplies::Response> {
+    pub fn fetch_users(&self, o: ::grpc::RequestOptions, req: super::empty::Empty) -> ::grpc::SingleResponse<super::medical_supplies::UserResponse> {
         let descriptor = ::grpc::rt::ArcOrStatic::Static(&::grpc::rt::MethodDescriptor {
             name: ::grpc::rt::StringOrStatic::Static("/medical_supplies.MedicalSupplies/FetchUsers"),
             streaming: ::grpc::rt::GrpcStreaming::Unary,
@@ -86,7 +86,7 @@ impl MedicalSuppliesClient {
         self.grpc_client.call_unary(o, req, descriptor)
     }
 
-    pub fn update_user(&self, o: ::grpc::RequestOptions, req: super::medical_supplies::Request) -> ::grpc::SingleResponse<super::medical_supplies::Response> {
+    pub fn update_user(&self, o: ::grpc::RequestOptions, req: super::medical_supplies::Request) -> ::grpc::SingleResponse<super::medical_supplies::UserResponse> {
         let descriptor = ::grpc::rt::ArcOrStatic::Static(&::grpc::rt::MethodDescriptor {
             name: ::grpc::rt::StringOrStatic::Static("/medical_supplies.MedicalSupplies/UpdateUser"),
             streaming: ::grpc::rt::GrpcStreaming::Unary,
@@ -96,7 +96,7 @@ impl MedicalSuppliesClient {
         self.grpc_client.call_unary(o, req, descriptor)
     }
 
-    pub fn delete_user(&self, o: ::grpc::RequestOptions, req: super::medical_supplies::User) -> ::grpc::SingleResponse<super::medical_supplies::Response> {
+    pub fn delete_user(&self, o: ::grpc::RequestOptions, req: super::medical_supplies::User) -> ::grpc::SingleResponse<super::medical_supplies::UserResponse> {
         let descriptor = ::grpc::rt::ArcOrStatic::Static(&::grpc::rt::MethodDescriptor {
             name: ::grpc::rt::StringOrStatic::Static("/medical_supplies.MedicalSupplies/DeleteUser"),
             streaming: ::grpc::rt::GrpcStreaming::Unary,
@@ -106,7 +106,7 @@ impl MedicalSuppliesClient {
         self.grpc_client.call_unary(o, req, descriptor)
     }
 
-    pub fn insert_equipment(&self, o: ::grpc::RequestOptions, req: super::medical_supplies::Item) -> ::grpc::SingleResponse<super::medical_supplies::Response> {
+    pub fn insert_equipment(&self, o: ::grpc::RequestOptions, req: super::medical_supplies::Item) -> ::grpc::SingleResponse<super::medical_supplies::EquipmentResponse> {
         let descriptor = ::grpc::rt::ArcOrStatic::Static(&::grpc::rt::MethodDescriptor {
             name: ::grpc::rt::StringOrStatic::Static("/medical_supplies.MedicalSupplies/InsertEquipment"),
             streaming: ::grpc::rt::GrpcStreaming::Unary,
@@ -116,7 +116,7 @@ impl MedicalSuppliesClient {
         self.grpc_client.call_unary(o, req, descriptor)
     }
 
-    pub fn fetch_equipment(&self, o: ::grpc::RequestOptions, req: super::empty::Empty) -> ::grpc::SingleResponse<super::medical_supplies::Response> {
+    pub fn fetch_equipment(&self, o: ::grpc::RequestOptions, req: super::empty::Empty) -> ::grpc::SingleResponse<super::medical_supplies::EquipmentResponse> {
         let descriptor = ::grpc::rt::ArcOrStatic::Static(&::grpc::rt::MethodDescriptor {
             name: ::grpc::rt::StringOrStatic::Static("/medical_supplies.MedicalSupplies/FetchEquipment"),
             streaming: ::grpc::rt::GrpcStreaming::Unary,
@@ -126,7 +126,7 @@ impl MedicalSuppliesClient {
         self.grpc_client.call_unary(o, req, descriptor)
     }
 
-    pub fn update_equipment(&self, o: ::grpc::RequestOptions, req: super::medical_supplies::User) -> ::grpc::SingleResponse<super::medical_supplies::Response> {
+    pub fn update_equipment(&self, o: ::grpc::RequestOptions, req: super::medical_supplies::User) -> ::grpc::SingleResponse<super::medical_supplies::EquipmentResponse> {
         let descriptor = ::grpc::rt::ArcOrStatic::Static(&::grpc::rt::MethodDescriptor {
             name: ::grpc::rt::StringOrStatic::Static("/medical_supplies.MedicalSupplies/UpdateEquipment"),
             streaming: ::grpc::rt::GrpcStreaming::Unary,
@@ -136,7 +136,7 @@ impl MedicalSuppliesClient {
         self.grpc_client.call_unary(o, req, descriptor)
     }
 
-    pub fn delete_equipment(&self, o: ::grpc::RequestOptions, req: super::medical_supplies::Request) -> ::grpc::SingleResponse<super::medical_supplies::Response> {
+    pub fn delete_equipment(&self, o: ::grpc::RequestOptions, req: super::medical_supplies::Request) -> ::grpc::SingleResponse<super::medical_supplies::EquipmentResponse> {
         let descriptor = ::grpc::rt::ArcOrStatic::Static(&::grpc::rt::MethodDescriptor {
             name: ::grpc::rt::StringOrStatic::Static("/medical_supplies.MedicalSupplies/DeleteEquipment"),
             streaming: ::grpc::rt::GrpcStreaming::Unary,

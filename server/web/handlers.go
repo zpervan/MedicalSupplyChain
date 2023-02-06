@@ -3,6 +3,7 @@ package web
 import (
 	"context"
 	"fmt"
+	gpb "github.com/golang/protobuf/ptypes/empty"
 	"server/core"
 	"server/database"
 	ms "server/proto"
@@ -23,21 +24,33 @@ func NewServer(log *core.Logger, database *database.Database) *Server {
 	return server
 }
 
-func (s *Server) TestRequest(ctx context.Context, in *ms.Request) (*ms.Response, error) {
+func (s *Server) TestRequest(_ context.Context, in *ms.Request) (*ms.DummyResponse, error) {
 	s.Log.Info("received request from client")
 
 	message := fmt.Sprintf("Hey, my dear friend %s", in.Data)
 
-	return &ms.Response{Data: message, Error: &ms.Error{Code: ms.ErrorCode_OK, Message: ""}}, nil
+	return &ms.DummyResponse{Data: message}, nil
 }
 
-func (s *Server) CreateUser(ctx context.Context, in *ms.User) (*ms.Response, error) {
+func (s *Server) CreateUser(_ context.Context, in *ms.User) (*ms.UserResponse, error) {
 	s.Log.Info("creating new user")
 
 	err := s.Database.CreateUser(in)
 	if err != nil {
-		return &ms.Response{Error: &ms.Error{Code: ms.ErrorCode_INTERNAL_ERROR, Message: err.Error()}}, err
+		return &ms.UserResponse{Error: &ms.Error{Code: ms.ErrorCode_INTERNAL_ERROR, Message: err.Error()}}, err
 	}
-	
-	return &ms.Response{}, nil
+
+	return &ms.UserResponse{}, nil
+}
+
+func (s *Server) FetchUsers(_ context.Context, _ *gpb.Empty) (*ms.UserResponse, error) {
+	s.Log.Info("fetching all users")
+	users, err := s.Database.FetchUsers()
+
+	if err != nil {
+		errorMessage := fmt.Sprintf("could not fetch all users. reason: %s", err.Error())
+		return &ms.UserResponse{Error: &ms.Error{Code: ms.ErrorCode_INTERNAL_ERROR, Message: errorMessage}}, err
+	}
+
+	return &ms.UserResponse{Users: users}, nil
 }

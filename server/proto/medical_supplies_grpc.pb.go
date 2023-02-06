@@ -23,15 +23,15 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MedicalSuppliesClient interface {
-	TestRequest(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
-	CreateUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*Response, error)
-	FetchUsers(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Response, error)
-	UpdateUser(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
-	DeleteUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*Response, error)
-	InsertEquipment(ctx context.Context, in *Item, opts ...grpc.CallOption) (*Response, error)
-	FetchEquipment(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Response, error)
-	UpdateEquipment(ctx context.Context, in *User, opts ...grpc.CallOption) (*Response, error)
-	DeleteEquipment(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+	TestRequest(ctx context.Context, in *Request, opts ...grpc.CallOption) (*DummyResponse, error)
+	CreateUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*UserResponse, error)
+	FetchUsers(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*UserResponse, error)
+	UpdateUser(ctx context.Context, in *Request, opts ...grpc.CallOption) (*UserResponse, error)
+	DeleteUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*UserResponse, error)
+	InsertEquipment(ctx context.Context, in *Item, opts ...grpc.CallOption) (*EquipmentResponse, error)
+	FetchEquipment(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*EquipmentResponse, error)
+	UpdateEquipment(ctx context.Context, in *User, opts ...grpc.CallOption) (*EquipmentResponse, error)
+	DeleteEquipment(ctx context.Context, in *Request, opts ...grpc.CallOption) (*EquipmentResponse, error)
 }
 
 type medicalSuppliesClient struct {
@@ -42,8 +42,8 @@ func NewMedicalSuppliesClient(cc grpc.ClientConnInterface) MedicalSuppliesClient
 	return &medicalSuppliesClient{cc}
 }
 
-func (c *medicalSuppliesClient) TestRequest(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
-	out := new(Response)
+func (c *medicalSuppliesClient) TestRequest(ctx context.Context, in *Request, opts ...grpc.CallOption) (*DummyResponse, error) {
+	out := new(DummyResponse)
 	err := c.cc.Invoke(ctx, "/medical_supplies.MedicalSupplies/TestRequest", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -51,8 +51,8 @@ func (c *medicalSuppliesClient) TestRequest(ctx context.Context, in *Request, op
 	return out, nil
 }
 
-func (c *medicalSuppliesClient) CreateUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*Response, error) {
-	out := new(Response)
+func (c *medicalSuppliesClient) CreateUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*UserResponse, error) {
+	out := new(UserResponse)
 	err := c.cc.Invoke(ctx, "/medical_supplies.MedicalSupplies/CreateUser", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -60,8 +60,8 @@ func (c *medicalSuppliesClient) CreateUser(ctx context.Context, in *User, opts .
 	return out, nil
 }
 
-func (c *medicalSuppliesClient) FetchUsers(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Response, error) {
-	out := new(Response)
+func (c *medicalSuppliesClient) FetchUsers(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*UserResponse, error) {
+	out := new(UserResponse)
 	err := c.cc.Invoke(ctx, "/medical_supplies.MedicalSupplies/FetchUsers", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -69,8 +69,8 @@ func (c *medicalSuppliesClient) FetchUsers(ctx context.Context, in *emptypb.Empt
 	return out, nil
 }
 
-func (c *medicalSuppliesClient) UpdateUser(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
-	out := new(Response)
+func (c *medicalSuppliesClient) UpdateUser(ctx context.Context, in *Request, opts ...grpc.CallOption) (*UserResponse, error) {
+	out := new(UserResponse)
 	err := c.cc.Invoke(ctx, "/medical_supplies.MedicalSupplies/UpdateUser", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -78,8 +78,8 @@ func (c *medicalSuppliesClient) UpdateUser(ctx context.Context, in *Request, opt
 	return out, nil
 }
 
-func (c *medicalSuppliesClient) DeleteUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*Response, error) {
-	out := new(Response)
+func (c *medicalSuppliesClient) DeleteUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*UserResponse, error) {
+	out := new(UserResponse)
 	err := c.cc.Invoke(ctx, "/medical_supplies.MedicalSupplies/DeleteUser", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -87,8 +87,8 @@ func (c *medicalSuppliesClient) DeleteUser(ctx context.Context, in *User, opts .
 	return out, nil
 }
 
-func (c *medicalSuppliesClient) InsertEquipment(ctx context.Context, in *Item, opts ...grpc.CallOption) (*Response, error) {
-	out := new(Response)
+func (c *medicalSuppliesClient) InsertEquipment(ctx context.Context, in *Item, opts ...grpc.CallOption) (*EquipmentResponse, error) {
+	out := new(EquipmentResponse)
 	err := c.cc.Invoke(ctx, "/medical_supplies.MedicalSupplies/InsertEquipment", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -96,8 +96,8 @@ func (c *medicalSuppliesClient) InsertEquipment(ctx context.Context, in *Item, o
 	return out, nil
 }
 
-func (c *medicalSuppliesClient) FetchEquipment(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*Response, error) {
-	out := new(Response)
+func (c *medicalSuppliesClient) FetchEquipment(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*EquipmentResponse, error) {
+	out := new(EquipmentResponse)
 	err := c.cc.Invoke(ctx, "/medical_supplies.MedicalSupplies/FetchEquipment", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -105,8 +105,8 @@ func (c *medicalSuppliesClient) FetchEquipment(ctx context.Context, in *emptypb.
 	return out, nil
 }
 
-func (c *medicalSuppliesClient) UpdateEquipment(ctx context.Context, in *User, opts ...grpc.CallOption) (*Response, error) {
-	out := new(Response)
+func (c *medicalSuppliesClient) UpdateEquipment(ctx context.Context, in *User, opts ...grpc.CallOption) (*EquipmentResponse, error) {
+	out := new(EquipmentResponse)
 	err := c.cc.Invoke(ctx, "/medical_supplies.MedicalSupplies/UpdateEquipment", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -114,8 +114,8 @@ func (c *medicalSuppliesClient) UpdateEquipment(ctx context.Context, in *User, o
 	return out, nil
 }
 
-func (c *medicalSuppliesClient) DeleteEquipment(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
-	out := new(Response)
+func (c *medicalSuppliesClient) DeleteEquipment(ctx context.Context, in *Request, opts ...grpc.CallOption) (*EquipmentResponse, error) {
+	out := new(EquipmentResponse)
 	err := c.cc.Invoke(ctx, "/medical_supplies.MedicalSupplies/DeleteEquipment", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -127,15 +127,15 @@ func (c *medicalSuppliesClient) DeleteEquipment(ctx context.Context, in *Request
 // All implementations must embed UnimplementedMedicalSuppliesServer
 // for forward compatibility
 type MedicalSuppliesServer interface {
-	TestRequest(context.Context, *Request) (*Response, error)
-	CreateUser(context.Context, *User) (*Response, error)
-	FetchUsers(context.Context, *emptypb.Empty) (*Response, error)
-	UpdateUser(context.Context, *Request) (*Response, error)
-	DeleteUser(context.Context, *User) (*Response, error)
-	InsertEquipment(context.Context, *Item) (*Response, error)
-	FetchEquipment(context.Context, *emptypb.Empty) (*Response, error)
-	UpdateEquipment(context.Context, *User) (*Response, error)
-	DeleteEquipment(context.Context, *Request) (*Response, error)
+	TestRequest(context.Context, *Request) (*DummyResponse, error)
+	CreateUser(context.Context, *User) (*UserResponse, error)
+	FetchUsers(context.Context, *emptypb.Empty) (*UserResponse, error)
+	UpdateUser(context.Context, *Request) (*UserResponse, error)
+	DeleteUser(context.Context, *User) (*UserResponse, error)
+	InsertEquipment(context.Context, *Item) (*EquipmentResponse, error)
+	FetchEquipment(context.Context, *emptypb.Empty) (*EquipmentResponse, error)
+	UpdateEquipment(context.Context, *User) (*EquipmentResponse, error)
+	DeleteEquipment(context.Context, *Request) (*EquipmentResponse, error)
 	mustEmbedUnimplementedMedicalSuppliesServer()
 }
 
@@ -143,31 +143,31 @@ type MedicalSuppliesServer interface {
 type UnimplementedMedicalSuppliesServer struct {
 }
 
-func (UnimplementedMedicalSuppliesServer) TestRequest(context.Context, *Request) (*Response, error) {
+func (UnimplementedMedicalSuppliesServer) TestRequest(context.Context, *Request) (*DummyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TestRequest not implemented")
 }
-func (UnimplementedMedicalSuppliesServer) CreateUser(context.Context, *User) (*Response, error) {
+func (UnimplementedMedicalSuppliesServer) CreateUser(context.Context, *User) (*UserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
 }
-func (UnimplementedMedicalSuppliesServer) FetchUsers(context.Context, *emptypb.Empty) (*Response, error) {
+func (UnimplementedMedicalSuppliesServer) FetchUsers(context.Context, *emptypb.Empty) (*UserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FetchUsers not implemented")
 }
-func (UnimplementedMedicalSuppliesServer) UpdateUser(context.Context, *Request) (*Response, error) {
+func (UnimplementedMedicalSuppliesServer) UpdateUser(context.Context, *Request) (*UserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
 }
-func (UnimplementedMedicalSuppliesServer) DeleteUser(context.Context, *User) (*Response, error) {
+func (UnimplementedMedicalSuppliesServer) DeleteUser(context.Context, *User) (*UserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteUser not implemented")
 }
-func (UnimplementedMedicalSuppliesServer) InsertEquipment(context.Context, *Item) (*Response, error) {
+func (UnimplementedMedicalSuppliesServer) InsertEquipment(context.Context, *Item) (*EquipmentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InsertEquipment not implemented")
 }
-func (UnimplementedMedicalSuppliesServer) FetchEquipment(context.Context, *emptypb.Empty) (*Response, error) {
+func (UnimplementedMedicalSuppliesServer) FetchEquipment(context.Context, *emptypb.Empty) (*EquipmentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FetchEquipment not implemented")
 }
-func (UnimplementedMedicalSuppliesServer) UpdateEquipment(context.Context, *User) (*Response, error) {
+func (UnimplementedMedicalSuppliesServer) UpdateEquipment(context.Context, *User) (*EquipmentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateEquipment not implemented")
 }
-func (UnimplementedMedicalSuppliesServer) DeleteEquipment(context.Context, *Request) (*Response, error) {
+func (UnimplementedMedicalSuppliesServer) DeleteEquipment(context.Context, *Request) (*EquipmentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteEquipment not implemented")
 }
 func (UnimplementedMedicalSuppliesServer) mustEmbedUnimplementedMedicalSuppliesServer() {}

@@ -7,15 +7,15 @@ package medical_supplies;
 option go_package = "message.proto/medical_supplies";
 
 service MedicalSupplies {
-  rpc TestRequest(Request) returns (Response) {}
-  rpc CreateUser(User) returns (Response) {}
-  rpc FetchUsers(google.protobuf.Empty) returns (Response) {}
-  rpc UpdateUser(Request) returns (Response) {}
-  rpc DeleteUser(User) returns (Response) {}
-  rpc InsertEquipment(Item) returns (Response) {}
-  rpc FetchEquipment(google.protobuf.Empty) returns (Response) {}
-  rpc UpdateEquipment(User) returns (Response) {}
-  rpc DeleteEquipment(Request) returns (Response) {}
+  rpc TestRequest(Request) returns (DummyResponse) {}
+  rpc CreateUser(User) returns (UserResponse) {}
+  rpc FetchUsers(google.protobuf.Empty) returns (UserResponse) {}
+  rpc UpdateUser(Request) returns (UserResponse) {}
+  rpc DeleteUser(User) returns (UserResponse) {}
+  rpc InsertEquipment(Item) returns (EquipmentResponse) {}
+  rpc FetchEquipment(google.protobuf.Empty) returns (EquipmentResponse) {}
+  rpc UpdateEquipment(User) returns (EquipmentResponse) {}
+  rpc DeleteEquipment(Request) returns (EquipmentResponse) {}
 }
 
 enum ErrorCode {
@@ -34,9 +34,17 @@ message Request {
   string Data = 1;
 }
 
-message Response 
-{ 
+message DummyResponse {
   string Data = 1;
+}
+
+message UserResponse { 
+  repeated User Users = 1;
+  Error Error = 2;
+}
+
+message EquipmentResponse {
+  repeated Item Items = 1;
   Error Error = 2;
 }
 
@@ -47,7 +55,9 @@ message User {
 	string Name = 4;
 	string Surname = 5;
 	string Role = 6;
-	string Department = 7; 
+	string Department = 7;
+  string Created = 8;
+  string LastLogin = 9;
 }
 
 message Item {

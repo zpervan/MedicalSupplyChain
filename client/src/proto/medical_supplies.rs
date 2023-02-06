@@ -373,23 +373,22 @@ impl ::protobuf::reflect::ProtobufValue for Request {
 }
 
 #[derive(PartialEq,Clone,Default)]
-pub struct Response {
+pub struct DummyResponse {
     // message fields
     pub Data: ::std::string::String,
-    pub Error: ::protobuf::SingularPtrField<Error>,
     // special fields
     pub unknown_fields: ::protobuf::UnknownFields,
     pub cached_size: ::protobuf::CachedSize,
 }
 
-impl<'a> ::std::default::Default for &'a Response {
-    fn default() -> &'a Response {
-        <Response as ::protobuf::Message>::default_instance()
+impl<'a> ::std::default::Default for &'a DummyResponse {
+    fn default() -> &'a DummyResponse {
+        <DummyResponse as ::protobuf::Message>::default_instance()
     }
 }
 
-impl Response {
-    pub fn new() -> Response {
+impl DummyResponse {
+    pub fn new() -> DummyResponse {
         ::std::default::Default::default()
     }
 
@@ -417,6 +416,165 @@ impl Response {
     // Take field
     pub fn take_Data(&mut self) -> ::std::string::String {
         ::std::mem::replace(&mut self.Data, ::std::string::String::new())
+    }
+}
+
+impl ::protobuf::Message for DummyResponse {
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::ProtobufResult<()> {
+        while !is.eof()? {
+            let (field_number, wire_type) = is.read_tag_unpack()?;
+            match field_number {
+                1 => {
+                    ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.Data)?;
+                },
+                _ => {
+                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u32 {
+        let mut my_size = 0;
+        if !self.Data.is_empty() {
+            my_size += ::protobuf::rt::string_size(1, &self.Data);
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
+        self.cached_size.set(my_size);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::ProtobufResult<()> {
+        if !self.Data.is_empty() {
+            os.write_string(1, &self.Data)?;
+        }
+        os.write_unknown_fields(self.get_unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn get_cached_size(&self) -> u32 {
+        self.cached_size.get()
+    }
+
+    fn get_unknown_fields(&self) -> &::protobuf::UnknownFields {
+        &self.unknown_fields
+    }
+
+    fn mut_unknown_fields(&mut self) -> &mut ::protobuf::UnknownFields {
+        &mut self.unknown_fields
+    }
+
+    fn as_any(&self) -> &dyn (::std::any::Any) {
+        self as &dyn (::std::any::Any)
+    }
+    fn as_any_mut(&mut self) -> &mut dyn (::std::any::Any) {
+        self as &mut dyn (::std::any::Any)
+    }
+    fn into_any(self: ::std::boxed::Box<Self>) -> ::std::boxed::Box<dyn (::std::any::Any)> {
+        self
+    }
+
+    fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
+        Self::descriptor_static()
+    }
+
+    fn new() -> DummyResponse {
+        DummyResponse::new()
+    }
+
+    fn descriptor_static() -> &'static ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
+        descriptor.get(|| {
+            let mut fields = ::std::vec::Vec::new();
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+                "Data",
+                |m: &DummyResponse| { &m.Data },
+                |m: &mut DummyResponse| { &mut m.Data },
+            ));
+            ::protobuf::reflect::MessageDescriptor::new_pb_name::<DummyResponse>(
+                "DummyResponse",
+                fields,
+                file_descriptor_proto()
+            )
+        })
+    }
+
+    fn default_instance() -> &'static DummyResponse {
+        static instance: ::protobuf::rt::LazyV2<DummyResponse> = ::protobuf::rt::LazyV2::INIT;
+        instance.get(DummyResponse::new)
+    }
+}
+
+impl ::protobuf::Clear for DummyResponse {
+    fn clear(&mut self) {
+        self.Data.clear();
+        self.unknown_fields.clear();
+    }
+}
+
+impl ::std::fmt::Debug for DummyResponse {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for DummyResponse {
+    fn as_ref(&self) -> ::protobuf::reflect::ReflectValueRef {
+        ::protobuf::reflect::ReflectValueRef::Message(self)
+    }
+}
+
+#[derive(PartialEq,Clone,Default)]
+pub struct UserResponse {
+    // message fields
+    pub Users: ::protobuf::RepeatedField<User>,
+    pub Error: ::protobuf::SingularPtrField<Error>,
+    // special fields
+    pub unknown_fields: ::protobuf::UnknownFields,
+    pub cached_size: ::protobuf::CachedSize,
+}
+
+impl<'a> ::std::default::Default for &'a UserResponse {
+    fn default() -> &'a UserResponse {
+        <UserResponse as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl UserResponse {
+    pub fn new() -> UserResponse {
+        ::std::default::Default::default()
+    }
+
+    // repeated .medical_supplies.User Users = 1;
+
+
+    pub fn get_Users(&self) -> &[User] {
+        &self.Users
+    }
+    pub fn clear_Users(&mut self) {
+        self.Users.clear();
+    }
+
+    // Param is passed by value, moved
+    pub fn set_Users(&mut self, v: ::protobuf::RepeatedField<User>) {
+        self.Users = v;
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_Users(&mut self) -> &mut ::protobuf::RepeatedField<User> {
+        &mut self.Users
+    }
+
+    // Take field
+    pub fn take_Users(&mut self) -> ::protobuf::RepeatedField<User> {
+        ::std::mem::replace(&mut self.Users, ::protobuf::RepeatedField::new())
     }
 
     // .medical_supplies.Error Error = 2;
@@ -453,8 +611,13 @@ impl Response {
     }
 }
 
-impl ::protobuf::Message for Response {
+impl ::protobuf::Message for UserResponse {
     fn is_initialized(&self) -> bool {
+        for v in &self.Users {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
         for v in &self.Error {
             if !v.is_initialized() {
                 return false;
@@ -468,7 +631,7 @@ impl ::protobuf::Message for Response {
             let (field_number, wire_type) = is.read_tag_unpack()?;
             match field_number {
                 1 => {
-                    ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.Data)?;
+                    ::protobuf::rt::read_repeated_message_into(wire_type, is, &mut self.Users)?;
                 },
                 2 => {
                     ::protobuf::rt::read_singular_message_into(wire_type, is, &mut self.Error)?;
@@ -485,9 +648,10 @@ impl ::protobuf::Message for Response {
     #[allow(unused_variables)]
     fn compute_size(&self) -> u32 {
         let mut my_size = 0;
-        if !self.Data.is_empty() {
-            my_size += ::protobuf::rt::string_size(1, &self.Data);
-        }
+        for value in &self.Users {
+            let len = value.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+        };
         if let Some(ref v) = self.Error.as_ref() {
             let len = v.compute_size();
             my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
@@ -498,9 +662,11 @@ impl ::protobuf::Message for Response {
     }
 
     fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::ProtobufResult<()> {
-        if !self.Data.is_empty() {
-            os.write_string(1, &self.Data)?;
-        }
+        for v in &self.Users {
+            os.write_tag(1, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+            os.write_raw_varint32(v.get_cached_size())?;
+            v.write_to_with_cached_sizes(os)?;
+        };
         if let Some(ref v) = self.Error.as_ref() {
             os.write_tag(2, ::protobuf::wire_format::WireTypeLengthDelimited)?;
             os.write_raw_varint32(v.get_cached_size())?;
@@ -536,53 +702,276 @@ impl ::protobuf::Message for Response {
         Self::descriptor_static()
     }
 
-    fn new() -> Response {
-        Response::new()
+    fn new() -> UserResponse {
+        UserResponse::new()
     }
 
     fn descriptor_static() -> &'static ::protobuf::reflect::MessageDescriptor {
         static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
         descriptor.get(|| {
             let mut fields = ::std::vec::Vec::new();
-            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
-                "Data",
-                |m: &Response| { &m.Data },
-                |m: &mut Response| { &mut m.Data },
+            fields.push(::protobuf::reflect::accessor::make_repeated_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<User>>(
+                "Users",
+                |m: &UserResponse| { &m.Users },
+                |m: &mut UserResponse| { &mut m.Users },
             ));
             fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<Error>>(
                 "Error",
-                |m: &Response| { &m.Error },
-                |m: &mut Response| { &mut m.Error },
+                |m: &UserResponse| { &m.Error },
+                |m: &mut UserResponse| { &mut m.Error },
             ));
-            ::protobuf::reflect::MessageDescriptor::new_pb_name::<Response>(
-                "Response",
+            ::protobuf::reflect::MessageDescriptor::new_pb_name::<UserResponse>(
+                "UserResponse",
                 fields,
                 file_descriptor_proto()
             )
         })
     }
 
-    fn default_instance() -> &'static Response {
-        static instance: ::protobuf::rt::LazyV2<Response> = ::protobuf::rt::LazyV2::INIT;
-        instance.get(Response::new)
+    fn default_instance() -> &'static UserResponse {
+        static instance: ::protobuf::rt::LazyV2<UserResponse> = ::protobuf::rt::LazyV2::INIT;
+        instance.get(UserResponse::new)
     }
 }
 
-impl ::protobuf::Clear for Response {
+impl ::protobuf::Clear for UserResponse {
     fn clear(&mut self) {
-        self.Data.clear();
+        self.Users.clear();
         self.Error.clear();
         self.unknown_fields.clear();
     }
 }
 
-impl ::std::fmt::Debug for Response {
+impl ::std::fmt::Debug for UserResponse {
     fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
         ::protobuf::text_format::fmt(self, f)
     }
 }
 
-impl ::protobuf::reflect::ProtobufValue for Response {
+impl ::protobuf::reflect::ProtobufValue for UserResponse {
+    fn as_ref(&self) -> ::protobuf::reflect::ReflectValueRef {
+        ::protobuf::reflect::ReflectValueRef::Message(self)
+    }
+}
+
+#[derive(PartialEq,Clone,Default)]
+pub struct EquipmentResponse {
+    // message fields
+    pub Items: ::protobuf::RepeatedField<Item>,
+    pub Error: ::protobuf::SingularPtrField<Error>,
+    // special fields
+    pub unknown_fields: ::protobuf::UnknownFields,
+    pub cached_size: ::protobuf::CachedSize,
+}
+
+impl<'a> ::std::default::Default for &'a EquipmentResponse {
+    fn default() -> &'a EquipmentResponse {
+        <EquipmentResponse as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl EquipmentResponse {
+    pub fn new() -> EquipmentResponse {
+        ::std::default::Default::default()
+    }
+
+    // repeated .medical_supplies.Item Items = 1;
+
+
+    pub fn get_Items(&self) -> &[Item] {
+        &self.Items
+    }
+    pub fn clear_Items(&mut self) {
+        self.Items.clear();
+    }
+
+    // Param is passed by value, moved
+    pub fn set_Items(&mut self, v: ::protobuf::RepeatedField<Item>) {
+        self.Items = v;
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_Items(&mut self) -> &mut ::protobuf::RepeatedField<Item> {
+        &mut self.Items
+    }
+
+    // Take field
+    pub fn take_Items(&mut self) -> ::protobuf::RepeatedField<Item> {
+        ::std::mem::replace(&mut self.Items, ::protobuf::RepeatedField::new())
+    }
+
+    // .medical_supplies.Error Error = 2;
+
+
+    pub fn get_Error(&self) -> &Error {
+        self.Error.as_ref().unwrap_or_else(|| <Error as ::protobuf::Message>::default_instance())
+    }
+    pub fn clear_Error(&mut self) {
+        self.Error.clear();
+    }
+
+    pub fn has_Error(&self) -> bool {
+        self.Error.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_Error(&mut self, v: Error) {
+        self.Error = ::protobuf::SingularPtrField::some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_Error(&mut self) -> &mut Error {
+        if self.Error.is_none() {
+            self.Error.set_default();
+        }
+        self.Error.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_Error(&mut self) -> Error {
+        self.Error.take().unwrap_or_else(|| Error::new())
+    }
+}
+
+impl ::protobuf::Message for EquipmentResponse {
+    fn is_initialized(&self) -> bool {
+        for v in &self.Items {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
+        for v in &self.Error {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::ProtobufResult<()> {
+        while !is.eof()? {
+            let (field_number, wire_type) = is.read_tag_unpack()?;
+            match field_number {
+                1 => {
+                    ::protobuf::rt::read_repeated_message_into(wire_type, is, &mut self.Items)?;
+                },
+                2 => {
+                    ::protobuf::rt::read_singular_message_into(wire_type, is, &mut self.Error)?;
+                },
+                _ => {
+                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u32 {
+        let mut my_size = 0;
+        for value in &self.Items {
+            let len = value.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+        };
+        if let Some(ref v) = self.Error.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
+        self.cached_size.set(my_size);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::ProtobufResult<()> {
+        for v in &self.Items {
+            os.write_tag(1, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+            os.write_raw_varint32(v.get_cached_size())?;
+            v.write_to_with_cached_sizes(os)?;
+        };
+        if let Some(ref v) = self.Error.as_ref() {
+            os.write_tag(2, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+            os.write_raw_varint32(v.get_cached_size())?;
+            v.write_to_with_cached_sizes(os)?;
+        }
+        os.write_unknown_fields(self.get_unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn get_cached_size(&self) -> u32 {
+        self.cached_size.get()
+    }
+
+    fn get_unknown_fields(&self) -> &::protobuf::UnknownFields {
+        &self.unknown_fields
+    }
+
+    fn mut_unknown_fields(&mut self) -> &mut ::protobuf::UnknownFields {
+        &mut self.unknown_fields
+    }
+
+    fn as_any(&self) -> &dyn (::std::any::Any) {
+        self as &dyn (::std::any::Any)
+    }
+    fn as_any_mut(&mut self) -> &mut dyn (::std::any::Any) {
+        self as &mut dyn (::std::any::Any)
+    }
+    fn into_any(self: ::std::boxed::Box<Self>) -> ::std::boxed::Box<dyn (::std::any::Any)> {
+        self
+    }
+
+    fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
+        Self::descriptor_static()
+    }
+
+    fn new() -> EquipmentResponse {
+        EquipmentResponse::new()
+    }
+
+    fn descriptor_static() -> &'static ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::LazyV2<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::LazyV2::INIT;
+        descriptor.get(|| {
+            let mut fields = ::std::vec::Vec::new();
+            fields.push(::protobuf::reflect::accessor::make_repeated_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<Item>>(
+                "Items",
+                |m: &EquipmentResponse| { &m.Items },
+                |m: &mut EquipmentResponse| { &mut m.Items },
+            ));
+            fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<Error>>(
+                "Error",
+                |m: &EquipmentResponse| { &m.Error },
+                |m: &mut EquipmentResponse| { &mut m.Error },
+            ));
+            ::protobuf::reflect::MessageDescriptor::new_pb_name::<EquipmentResponse>(
+                "EquipmentResponse",
+                fields,
+                file_descriptor_proto()
+            )
+        })
+    }
+
+    fn default_instance() -> &'static EquipmentResponse {
+        static instance: ::protobuf::rt::LazyV2<EquipmentResponse> = ::protobuf::rt::LazyV2::INIT;
+        instance.get(EquipmentResponse::new)
+    }
+}
+
+impl ::protobuf::Clear for EquipmentResponse {
+    fn clear(&mut self) {
+        self.Items.clear();
+        self.Error.clear();
+        self.unknown_fields.clear();
+    }
+}
+
+impl ::std::fmt::Debug for EquipmentResponse {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for EquipmentResponse {
     fn as_ref(&self) -> ::protobuf::reflect::ReflectValueRef {
         ::protobuf::reflect::ReflectValueRef::Message(self)
     }
@@ -598,6 +987,8 @@ pub struct User {
     pub Surname: ::std::string::String,
     pub Role: ::std::string::String,
     pub Department: ::std::string::String,
+    pub Created: ::std::string::String,
+    pub LastLogin: ::std::string::String,
     // special fields
     pub unknown_fields: ::protobuf::UnknownFields,
     pub cached_size: ::protobuf::CachedSize,
@@ -795,6 +1186,58 @@ impl User {
     pub fn take_Department(&mut self) -> ::std::string::String {
         ::std::mem::replace(&mut self.Department, ::std::string::String::new())
     }
+
+    // string Created = 8;
+
+
+    pub fn get_Created(&self) -> &str {
+        &self.Created
+    }
+    pub fn clear_Created(&mut self) {
+        self.Created.clear();
+    }
+
+    // Param is passed by value, moved
+    pub fn set_Created(&mut self, v: ::std::string::String) {
+        self.Created = v;
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_Created(&mut self) -> &mut ::std::string::String {
+        &mut self.Created
+    }
+
+    // Take field
+    pub fn take_Created(&mut self) -> ::std::string::String {
+        ::std::mem::replace(&mut self.Created, ::std::string::String::new())
+    }
+
+    // string LastLogin = 9;
+
+
+    pub fn get_LastLogin(&self) -> &str {
+        &self.LastLogin
+    }
+    pub fn clear_LastLogin(&mut self) {
+        self.LastLogin.clear();
+    }
+
+    // Param is passed by value, moved
+    pub fn set_LastLogin(&mut self, v: ::std::string::String) {
+        self.LastLogin = v;
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_LastLogin(&mut self) -> &mut ::std::string::String {
+        &mut self.LastLogin
+    }
+
+    // Take field
+    pub fn take_LastLogin(&mut self) -> ::std::string::String {
+        ::std::mem::replace(&mut self.LastLogin, ::std::string::String::new())
+    }
 }
 
 impl ::protobuf::Message for User {
@@ -826,6 +1269,12 @@ impl ::protobuf::Message for User {
                 },
                 7 => {
                     ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.Department)?;
+                },
+                8 => {
+                    ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.Created)?;
+                },
+                9 => {
+                    ::protobuf::rt::read_singular_proto3_string_into(wire_type, is, &mut self.LastLogin)?;
                 },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
@@ -860,6 +1309,12 @@ impl ::protobuf::Message for User {
         if !self.Department.is_empty() {
             my_size += ::protobuf::rt::string_size(7, &self.Department);
         }
+        if !self.Created.is_empty() {
+            my_size += ::protobuf::rt::string_size(8, &self.Created);
+        }
+        if !self.LastLogin.is_empty() {
+            my_size += ::protobuf::rt::string_size(9, &self.LastLogin);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
         my_size
@@ -886,6 +1341,12 @@ impl ::protobuf::Message for User {
         }
         if !self.Department.is_empty() {
             os.write_string(7, &self.Department)?;
+        }
+        if !self.Created.is_empty() {
+            os.write_string(8, &self.Created)?;
+        }
+        if !self.LastLogin.is_empty() {
+            os.write_string(9, &self.LastLogin)?;
         }
         os.write_unknown_fields(self.get_unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -960,6 +1421,16 @@ impl ::protobuf::Message for User {
                 |m: &User| { &m.Department },
                 |m: &mut User| { &mut m.Department },
             ));
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+                "Created",
+                |m: &User| { &m.Created },
+                |m: &mut User| { &mut m.Created },
+            ));
+            fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeString>(
+                "LastLogin",
+                |m: &User| { &m.LastLogin },
+                |m: &mut User| { &mut m.LastLogin },
+            ));
             ::protobuf::reflect::MessageDescriptor::new_pb_name::<User>(
                 "User",
                 fields,
@@ -983,6 +1454,8 @@ impl ::protobuf::Clear for User {
         self.Surname.clear();
         self.Role.clear();
         self.Department.clear();
+        self.Created.clear();
+        self.LastLogin.clear();
         self.unknown_fields.clear();
     }
 }
@@ -1506,34 +1979,40 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     buf/empty.proto\"R\n\x05Error\x12/\n\x04Code\x18\x01\x20\x01(\x0e2\x1b.m\
     edical_supplies.ErrorCodeR\x04Code\x12\x18\n\x07Message\x18\x02\x20\x01(\
     \tR\x07Message\"\x1d\n\x07Request\x12\x12\n\x04Data\x18\x01\x20\x01(\tR\
-    \x04Data\"M\n\x08Response\x12\x12\n\x04Data\x18\x01\x20\x01(\tR\x04Data\
-    \x12-\n\x05Error\x18\x02\x20\x01(\x0b2\x17.medical_supplies.ErrorR\x05Er\
-    ror\"\xb0\x01\n\x04User\x12\x0e\n\x02Id\x18\x01\x20\x01(\tR\x02Id\x12\
-    \x1a\n\x08Username\x18\x02\x20\x01(\tR\x08Username\x12\x1a\n\x08Password\
-    \x18\x03\x20\x01(\tR\x08Password\x12\x12\n\x04Name\x18\x04\x20\x01(\tR\
-    \x04Name\x12\x18\n\x07Surname\x18\x05\x20\x01(\tR\x07Surname\x12\x12\n\
-    \x04Role\x18\x06\x20\x01(\tR\x04Role\x12\x1e\n\nDepartment\x18\x07\x20\
-    \x01(\tR\nDepartment\"\xea\x01\n\x04Item\x12\x0e\n\x02Id\x18\x01\x20\x01\
-    (\tR\x02Id\x12\x12\n\x04Name\x18\x02\x20\x01(\tR\x04Name\x12\x20\n\x0bDe\
-    scription\x18\x03\x20\x01(\tR\x0bDescription\x12\"\n\x0cReceivedDate\x18\
-    \x04\x20\x01(\tR\x0cReceivedDate\x12\x1c\n\tTakenDate\x18\x05\x20\x01(\t\
-    R\tTakenDate\x12\"\n\x0cModifiedDate\x18\x06\x20\x01(\tR\x0cModifiedDate\
-    \x12\x1a\n\x08Quantity\x18\x07\x20\x01(\x05R\x08Quantity\x12\x1a\n\x08Ca\
-    tegory\x18\x08\x20\x01(\tR\x08Category*A\n\tErrorCode\x12\x06\n\x02OK\
-    \x10\0\x12\r\n\tNOT_FOUND\x10\x01\x12\x12\n\x0eINTERNAL_ERROR\x10\x02\
-    \x12\t\n\x05FATAL\x10\x032\x92\x05\n\x0fMedicalSupplies\x12F\n\x0bTestRe\
-    quest\x12\x19.medical_supplies.Request\x1a\x1a.medical_supplies.Response\
-    \"\0\x12B\n\nCreateUser\x12\x16.medical_supplies.User\x1a\x1a.medical_su\
-    pplies.Response\"\0\x12B\n\nFetchUsers\x12\x16.google.protobuf.Empty\x1a\
-    \x1a.medical_supplies.Response\"\0\x12E\n\nUpdateUser\x12\x19.medical_su\
-    pplies.Request\x1a\x1a.medical_supplies.Response\"\0\x12B\n\nDeleteUser\
-    \x12\x16.medical_supplies.User\x1a\x1a.medical_supplies.Response\"\0\x12\
-    G\n\x0fInsertEquipment\x12\x16.medical_supplies.Item\x1a\x1a.medical_sup\
-    plies.Response\"\0\x12F\n\x0eFetchEquipment\x12\x16.google.protobuf.Empt\
-    y\x1a\x1a.medical_supplies.Response\"\0\x12G\n\x0fUpdateEquipment\x12\
-    \x16.medical_supplies.User\x1a\x1a.medical_supplies.Response\"\0\x12J\n\
-    \x0fDeleteEquipment\x12\x19.medical_supplies.Request\x1a\x1a.medical_sup\
-    plies.Response\"\0B\x20Z\x1emessage.proto/medical_suppliesb\x06proto3\
+    \x04Data\"#\n\rDummyResponse\x12\x12\n\x04Data\x18\x01\x20\x01(\tR\x04Da\
+    ta\"k\n\x0cUserResponse\x12,\n\x05Users\x18\x01\x20\x03(\x0b2\x16.medica\
+    l_supplies.UserR\x05Users\x12-\n\x05Error\x18\x02\x20\x01(\x0b2\x17.medi\
+    cal_supplies.ErrorR\x05Error\"p\n\x11EquipmentResponse\x12,\n\x05Items\
+    \x18\x01\x20\x03(\x0b2\x16.medical_supplies.ItemR\x05Items\x12-\n\x05Err\
+    or\x18\x02\x20\x01(\x0b2\x17.medical_supplies.ErrorR\x05Error\"\xe8\x01\
+    \n\x04User\x12\x0e\n\x02Id\x18\x01\x20\x01(\tR\x02Id\x12\x1a\n\x08Userna\
+    me\x18\x02\x20\x01(\tR\x08Username\x12\x1a\n\x08Password\x18\x03\x20\x01\
+    (\tR\x08Password\x12\x12\n\x04Name\x18\x04\x20\x01(\tR\x04Name\x12\x18\n\
+    \x07Surname\x18\x05\x20\x01(\tR\x07Surname\x12\x12\n\x04Role\x18\x06\x20\
+    \x01(\tR\x04Role\x12\x1e\n\nDepartment\x18\x07\x20\x01(\tR\nDepartment\
+    \x12\x18\n\x07Created\x18\x08\x20\x01(\tR\x07Created\x12\x1c\n\tLastLogi\
+    n\x18\t\x20\x01(\tR\tLastLogin\"\xea\x01\n\x04Item\x12\x0e\n\x02Id\x18\
+    \x01\x20\x01(\tR\x02Id\x12\x12\n\x04Name\x18\x02\x20\x01(\tR\x04Name\x12\
+    \x20\n\x0bDescription\x18\x03\x20\x01(\tR\x0bDescription\x12\"\n\x0cRece\
+    ivedDate\x18\x04\x20\x01(\tR\x0cReceivedDate\x12\x1c\n\tTakenDate\x18\
+    \x05\x20\x01(\tR\tTakenDate\x12\"\n\x0cModifiedDate\x18\x06\x20\x01(\tR\
+    \x0cModifiedDate\x12\x1a\n\x08Quantity\x18\x07\x20\x01(\x05R\x08Quantity\
+    \x12\x1a\n\x08Category\x18\x08\x20\x01(\tR\x08Category*A\n\tErrorCode\
+    \x12\x06\n\x02OK\x10\0\x12\r\n\tNOT_FOUND\x10\x01\x12\x12\n\x0eINTERNAL_\
+    ERROR\x10\x02\x12\t\n\x05FATAL\x10\x032\xcb\x05\n\x0fMedicalSupplies\x12\
+    K\n\x0bTestRequest\x12\x19.medical_supplies.Request\x1a\x1f.medical_supp\
+    lies.DummyResponse\"\0\x12F\n\nCreateUser\x12\x16.medical_supplies.User\
+    \x1a\x1e.medical_supplies.UserResponse\"\0\x12F\n\nFetchUsers\x12\x16.go\
+    ogle.protobuf.Empty\x1a\x1e.medical_supplies.UserResponse\"\0\x12I\n\nUp\
+    dateUser\x12\x19.medical_supplies.Request\x1a\x1e.medical_supplies.UserR\
+    esponse\"\0\x12F\n\nDeleteUser\x12\x16.medical_supplies.User\x1a\x1e.med\
+    ical_supplies.UserResponse\"\0\x12P\n\x0fInsertEquipment\x12\x16.medical\
+    _supplies.Item\x1a#.medical_supplies.EquipmentResponse\"\0\x12O\n\x0eFet\
+    chEquipment\x12\x16.google.protobuf.Empty\x1a#.medical_supplies.Equipmen\
+    tResponse\"\0\x12P\n\x0fUpdateEquipment\x12\x16.medical_supplies.User\
+    \x1a#.medical_supplies.EquipmentResponse\"\0\x12S\n\x0fDeleteEquipment\
+    \x12\x19.medical_supplies.Request\x1a#.medical_supplies.EquipmentRespons\
+    e\"\0B\x20Z\x1emessage.proto/medical_suppliesb\x06proto3\
 ";
 
 static file_descriptor_proto_lazy: ::protobuf::rt::LazyV2<::protobuf::descriptor::FileDescriptorProto> = ::protobuf::rt::LazyV2::INIT;
