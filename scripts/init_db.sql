@@ -9,8 +9,8 @@ CREATE TABLE user_account (
     password text NOT NULL,
     role text NOT NULL,
     department text NOT NULL,
-    created_on TIMESTAMP NOT NULL,
-    last_login TIMESTAMP,
+    created timestamp NOT NULL,
+    last_login timestamp,
     PRIMARY KEY (id)
 );
 
