@@ -23,15 +23,15 @@ CREATE TABLE equipment_inventory (
 CREATE TABLE equipment_category (
     id uuid DEFAULT uuid_generate_v4 (),
     name text NOT NULL,
-    comment text NOT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE equipment (
     id uuid DEFAULT uuid_generate_v4 (),
-    user_id uuid,
-    equipment_inventory_id uuid NOT NULL,
-    equipment_category_id uuid NOT NULL,
+    -- TODO: Change equipment category and inventory ID's to be NOT NULL later on
+    user_id uuid DEFAULT NULL,
+    equipment_inventory_id uuid DEFAULT NULL,
+    equipment_category_id uuid DEFAULT NULL,
     name text NOT NULL UNIQUE,
     description text,
     received_date date NOT NULL,
@@ -40,3 +40,18 @@ CREATE TABLE equipment (
     FOREIGN KEY (equipment_inventory_id) REFERENCES equipment_inventory(id),
     FOREIGN KEY (equipment_category_id) REFERENCES equipment_category(id)
 );
+
+INSERT INTO
+    equipment_category (name)
+VALUES
+    ('Personal protective equipment'),
+    ('Injection'),
+    ('Wound care'),
+    ('Diagnostic'),
+    ('Emergency'),
+    ('Respiratory care'),
+    ('Patient monitoring'),
+    ('Medical imaging'),
+    ('Laboratory'),
+    ('Medical furniture and equipment'),
+    ('Medical consumables');
