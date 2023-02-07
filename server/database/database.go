@@ -26,6 +26,12 @@ func (d *Database) Connect(psqlInfo string) (*sql.DB, error) {
 		return nil, err
 	}
 
+	// Check if the server is connected to the database
+	err = database.Ping()
+	if err != nil {
+		return nil, err
+	}
+
 	d.logger.Info("database connection established")
 
 	return database, nil
