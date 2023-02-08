@@ -54,3 +54,26 @@ func (s *Server) FetchUsers(_ context.Context, _ *gpb.Empty) (*ms.UserResponse, 
 
 	return &ms.UserResponse{Users: users}, nil
 }
+
+func (s *Server) InsertEquipment(_ context.Context, in *ms.Item) (*ms.EquipmentResponse, error) {
+	s.Log.Info("inserting new item into equipment database")
+
+	err := s.Database.InsertEquipment(in)
+	if err != nil {
+		return &ms.EquipmentResponse{Error: &ms.Error{Code: ms.ErrorCode_INTERNAL_ERROR, Message: err.Error()}}, err
+	}
+
+	return &ms.EquipmentResponse{}, nil
+}
+
+func (s *Server) FetchEquipment(_ context.Context, _ *gpb.Empty) (*ms.EquipmentResponse, error) {
+	s.Log.Info("fetching equipment")
+	items, err := s.Database.FetchEquipment()
+
+	if err != nil {
+		errorMessage := fmt.Sprintf("could not fetch equipment. reason: %s", err.Error())
+		return &ms.EquipmentResponse{Error: &ms.Error{Code: ms.ErrorCode_INTERNAL_ERROR, Message: errorMessage}}, err
+	}
+
+	return &ms.EquipmentResponse{Items: items}, nil
+}
