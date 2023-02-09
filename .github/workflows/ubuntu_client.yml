@@ -23,8 +23,7 @@ jobs:
 
       # TODO: Figure out how to use the protoc bin in the `tools` folder
       - name: Install protobuf
-        run: sudo apt-get -y install protobuf-compiler
-
+        run: sudo apt-get -y install protobuf-compiler libglib2.0-dev libgtk-3-dev
       - name: Build client
         run: |
           cd client
