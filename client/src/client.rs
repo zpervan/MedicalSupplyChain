@@ -9,6 +9,7 @@ use proto::{medical_supplies::*, medical_supplies_grpc::*};
 #[derive(Clone, Data, Lens)]
 pub struct ClientState {
     response: String,
+    current_view: u32, // TODO: Add enums?
 }
 
 fn main() -> Result<(), PlatformError> {
@@ -26,6 +27,7 @@ fn main() -> Result<(), PlatformError> {
     // Example code - show the server response within the GUI
     let initial_state = ClientState {
         response: response_string,
+        current_view: 0,
     };
 
     let main_window = WindowDesc::new(gui::main_window::build()).menu(gui::menu_bar::make);

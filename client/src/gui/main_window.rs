@@ -1,6 +1,7 @@
 use crate::ClientState;
 use druid::{AppDelegate, Command, DelegateCtx, Env, Handled, Target, Widget, WindowHandle, WindowId};
-use druid::widget::{Flex, Label};
+use druid::widget::Flex;
+use crate::gui::menu_sidebar;
 
 pub struct Delegate
 {
@@ -32,14 +33,5 @@ impl AppDelegate<ClientState> for Delegate {
 }
 
 pub fn build() -> impl Widget<ClientState> {
-    let label = Label::new(|data: &ClientState, _env: &Env| {
-        if data.response.is_empty() {
-            "No response yet".to_string()
-        } else {
-            data.response.to_string()
-        }
-    });
-
-
-    Flex::row().with_child(label)
+    Flex::row().with_flex_child(menu_sidebar::make(), 1.0)
 }
