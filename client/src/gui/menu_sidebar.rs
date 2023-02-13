@@ -1,6 +1,7 @@
 use druid::{Env, Widget, WidgetExt};
 use druid::widget::{Button, Flex, Label, ViewSwitcher};
 use crate::ClientState;
+use spdlog::prelude::*;
 
 const BUTTON_SIZE: f64 = 140_f64;
 
@@ -14,7 +15,7 @@ pub fn make() -> impl Widget<ClientState> {
 
     // Add "Inventory button"
     sidebar.add_child(Button::new("Inventory").on_click(move |_event, data: &mut u32, _env| {
-        println!("button \"Inventory\" is clicked");
+        info!("button \"Inventory\" is clicked");
         *data = 0;
     })
         .fix_size(BUTTON_SIZE, BUTTON_SIZE)
@@ -24,7 +25,7 @@ pub fn make() -> impl Widget<ClientState> {
 
     // Add "Users" button
     sidebar.add_child(Button::new("Users").on_click(move |_event, data: &mut u32, _env| {
-        println!("button \"Users\" is clicked");
+        info!("button \"Users\" is clicked");
         *data = 1;
     })
         .fix_size(BUTTON_SIZE, BUTTON_SIZE)

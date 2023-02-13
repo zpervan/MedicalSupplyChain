@@ -2,6 +2,7 @@ use crate::ClientState;
 use druid::{AppDelegate, Command, DelegateCtx, Env, Handled, Target, Widget, WindowHandle, WindowId};
 use druid::widget::Flex;
 use crate::gui::menu_sidebar;
+use spdlog::prelude::*;
 
 pub struct Delegate
 {
@@ -33,5 +34,6 @@ impl AppDelegate<ClientState> for Delegate {
 }
 
 pub fn build() -> impl Widget<ClientState> {
+    debug!("building main window");
     Flex::row().with_flex_child(menu_sidebar::make(), 1.0)
 }
